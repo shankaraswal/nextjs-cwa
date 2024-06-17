@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
 export default function Home() {
