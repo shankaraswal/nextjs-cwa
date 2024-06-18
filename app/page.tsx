@@ -15,8 +15,8 @@ export default function Home() {
           Please login with user name and password !
         </p>
         <div>
-          <Button variant="shan" size="lg" asChild>
-            <a href="auth/login" className="hover:no-underline">
+          <Button variant="shan" size="lg" asChild className="no-underline">
+            <a href="auth/login" className="no-underline hover:no-underline">
               Login
             </a>
           </Button>
