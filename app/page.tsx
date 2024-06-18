@@ -15,11 +15,11 @@ export default function Home() {
           Please login with user name and password !
         </p>
         <div>
-          <LoginButton>
-            <Button variant="shan" size="lg">
+          <Button variant="shan" size="lg" asChild>
+            <a href="auth/login" className="hover:no-underline">
               Login
-            </Button>
-          </LoginButton>
+            </a>
+          </Button>
         </div>
       </div>
     </main>

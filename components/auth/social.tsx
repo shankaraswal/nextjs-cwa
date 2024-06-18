@@ -9,7 +9,7 @@ export const Social = () => {
     <div className="flex items-center w-full gap-x-2">
       <Button
         size="lg"
-        className="w-full"
+        className="w-full outline-1 outline outline-red-300"
         variant="outline"
         onClick={() => {
           window.location.href = "/auth/google";
@@ -19,7 +19,7 @@ export const Social = () => {
       </Button>
       <Button
         size="lg"
-        className="w-full"
+        className="w-full outline-1 outline outline-red-300"
         variant="outline"
         onClick={() => {
           window.location.href = "/auth/github";
