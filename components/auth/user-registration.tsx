@@ -127,7 +127,7 @@ export const UserRegistrationForm = () => {
             </div>
             <FormError message={errorMsg} />
             <FormSuccess message={successMsg} />
-            <Button variant="shan" type="submit" className="w-full">
+            <Button variant="aswa" type="submit" className="w-full">
               Create an account
             </Button>
           </form>
