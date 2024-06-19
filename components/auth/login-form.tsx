@@ -1,5 +1,6 @@
 "use client";
 
+import { useTransition, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,8 +18,12 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { loginActions } from "@/actions/login";
 
 export const LoginForm = () => {
+  const [errorMsg, setErrorMsg] = useState<string | undefined>("");
+  const [successMsg, setSuccessMsg] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -27,7 +32,15 @@ export const LoginForm = () => {
     },
   });
   const loginSubmit = async (data: z.infer<typeof LoginSchema>) => {
-    console.log(data);
+    setErrorMsg("");
+    setSuccessMsg("");
+
+    startTransition(() => {
+      loginActions(data).then((response) => {
+        setErrorMsg(response.error);
+        setSuccessMsg(response.success);
+      });
+    });
   };
 
   return (
@@ -53,6 +66,7 @@ export const LoginForm = () => {
                     <FormControl className="flex text-left border border-gray-400 rounded-none">
                       <Input
                         {...field}
+                        disabled={isPending}
                         type="email"
                         placeholder="shan@example.com"
                         className="w-full"
@@ -73,6 +87,7 @@ export const LoginForm = () => {
                     <FormControl className="flex text-left border border-gray-400 rounded-none">
                       <Input
                         {...field}
+                        disabled={isPending}
                         type="password"
                         placeholder="********"
                         className="w-full"
@@ -85,8 +100,8 @@ export const LoginForm = () => {
                 )}
               />
             </div>
-            <FormError message="Invalid credentials !" />
-            <FormSuccess message="Invalid credentials !" />
+            <FormError message={errorMsg} />
+            <FormSuccess message={successMsg} />
             <Button variant="shan" type="submit" className="w-full">
               Login
             </Button>
