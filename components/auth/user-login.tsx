@@ -18,7 +18,7 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { loginActions } from "@/actions/login";
+import { loginActions } from "@/actions/user-login";
 
 export const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
@@ -47,7 +47,7 @@ export const LoginForm = () => {
     <CardWrapper
       headerLabel="Welcome to login page"
       backButtonLabel="Don't have an account"
-      backButtonHref="/auth/login"
+      backButtonHref="/auth/user-registration"
       showSocialLogin={true}
     >
       <div className="flex items-center p-5">
