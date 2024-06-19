@@ -76,7 +76,7 @@ export const UserRegistrationForm = () => {
                       />
                     </FormControl>
                     <FormMessage>
-                      {form.formState.errors.fname?.message}
+                      {form.formState.errors.name?.message}
                     </FormMessage>
                   </FormItem>
                 )}
