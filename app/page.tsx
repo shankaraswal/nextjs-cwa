@@ -16,7 +16,10 @@ export default function Home() {
         </p>
         <div>
           <Button variant="shan" size="lg" asChild className="no-underline">
-            <a href="auth/login" className="no-underline hover:no-underline">
+            <a
+              href="auth/user-login"
+              className="no-underline hover:no-underline"
+            >
               Login
             </a>
           </Button>
