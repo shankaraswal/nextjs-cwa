@@ -18,7 +18,7 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { loginActions } from "@/actions/user-login";
+import { registrationActions } from "@/actions/user-registration";
 
 export const UserRegistrationForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
@@ -39,7 +39,7 @@ export const UserRegistrationForm = () => {
     setSuccessMsg("");
 
     startTransition(() => {
-      loginActions(data).then((response) => {
+      registrationActions(data).then((response) => {
         setErrorMsg(response.error);
         setSuccessMsg(response.success);
       });
