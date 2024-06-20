@@ -7,5 +7,5 @@ export const loginActions = async (data: z.infer<typeof LoginSchema>) => {
   if (!validateLoginForm.success) {
     return { error: "Invalid credentials !" };
   }
-  return { success: "Successfuly logged-in !" };
+  return { success: "User successfuly logged-in!" };
 };
