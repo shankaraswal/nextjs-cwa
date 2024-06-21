@@ -13,7 +13,7 @@ const SettingsPage = async () => {
           await signOut();
         }}
       >
-        <Button variant={"shan"}>Sign out</Button>
+        <button type="submit">Sign out</button>
       </form>
     </>
   );
