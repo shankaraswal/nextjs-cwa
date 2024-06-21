@@ -29,7 +29,7 @@ export const {
       if (!existingUser) {
         return token;
       }
-      token.role = existingUser.role;
+      token.role = (existingUser as any).role;
       return token;
     },
   },
