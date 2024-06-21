@@ -12,15 +12,15 @@ const { auth } = NextAuth(authConfig);
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const { nextUrl } = req;
-  // console.log("");
-  // console.log(
-  //   "[ CurrentUrl => ",
-  //   nextUrl.pathname,
-  //   ", isLoggedIn => ",
-  //   isLoggedIn,
-  //   " ]"
-  // );
-  // console.log("");
+  console.log("");
+  console.log(
+    "[ CurrentUrl => ",
+    nextUrl.pathname,
+    ", isLoggedIn => ",
+    isLoggedIn,
+    " ]"
+  );
+  console.log("");
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
