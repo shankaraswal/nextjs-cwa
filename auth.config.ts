@@ -7,7 +7,7 @@ import { getUserByEmail } from "@/data/user";
 export default {
   providers: [
     Credential({
-      authorize: async (credentials) => {
+      async authorize(credentials) {
         const validateCreds = LoginSchema.safeParse(credentials);
         if (validateCreds.success) {
           const { email, password } = validateCreds.data;
