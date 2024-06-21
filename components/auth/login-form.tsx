@@ -35,10 +35,15 @@ export const LoginForm = () => {
     setErrorMsg("");
     setSuccessMsg("");
 
-    startTransition(() => {
+    startTransition(async () => {
       loginActions(data).then((response) => {
-        setErrorMsg(response.error);
-        setSuccessMsg(response.success);
+        if (response) {
+          if (response.error) {
+            setErrorMsg(response.error);
+          } else {
+            setSuccessMsg("Login successful!");
+          }
+        }
       });
     });
   };
