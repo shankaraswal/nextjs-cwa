@@ -37,8 +37,6 @@ export const LoginForm = () => {
 
     startTransition(async () => {
       loginActions(data).then((response) => {
-        console.log("BBBBBB", data);
-        console.log("AAAAAAAA", response);
         if (response) {
           if (response.error) {
             setErrorMsg(response.error);
