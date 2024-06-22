@@ -10,6 +10,11 @@ export const {
   signOut,
   handlers: { GET, POST },
 } = NextAuth({
+  pages: {
+    signIn: "/auth/user-login",
+    error: "/auth/error",
+  },
+
   events: {
     async linkAccount({ user }) {
       await db.user.update({
