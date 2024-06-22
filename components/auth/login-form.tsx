@@ -1,10 +1,16 @@
 "use client";
 
-import { useTransition, useState } from "react";
+import {
+  useTransition,
+  useState,
+  // Suspense,
+  //  useEffect
+} from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schemas/index";
+import { useSearchParams } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -23,7 +29,26 @@ import { loginActions } from "@/actions/user-login";
 export const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
   const [successMsg, setSuccessMsg] = useState<string | undefined>("");
+
   const [isPending, startTransition] = useTransition();
+
+  // TODO: code is not working in vercel deployment branch : auth/existing-email-provider-error
+  // ---------------------------------------
+  // const [urlError, setUrlError] = useState<string>("");
+  // const searchParams = useSearchParams();
+  // const SearchBarFallback = () => {
+  //   return <p>loading...</p>;
+  // };
+
+  // useEffect(() => {
+  //   const errorParam = searchParams.get("error");
+  //   if (errorParam === "OAuthAccountNotLinked") {
+  //     setUrlError("Email used with different provider");
+  //   }
+  // }, [searchParams]);
+
+  // ---------------------------------------
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -105,6 +130,16 @@ export const LoginForm = () => {
                 )}
               />
             </div>
+            {/* 
+            // TODO: code is not working in vercel deployment BRANCH
+            auth/existing-email-provider-error 
+            // --------------------
+            <Suspense fallback={<SearchBarFallback />}>
+              <FormError message={errorMsg || urlError} />
+            </Suspense> 
+            // --------------------
+            */}
+
             <FormError message={errorMsg} />
             <FormSuccess message={successMsg} />
             <Button variant="shan" type="submit" className="w-full">
