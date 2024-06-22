@@ -1,6 +1,11 @@
 "use client";
 
-import { useTransition, useState, Suspense } from "react";
+import {
+  useTransition,
+  useState,
+  // Suspense,
+  //  useEffect
+} from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,13 +29,25 @@ import { loginActions } from "@/actions/user-login";
 export const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
   const [successMsg, setSuccessMsg] = useState<string | undefined>("");
+
   const [isPending, startTransition] = useTransition();
 
-  const searchParams = useSearchParams();
-  const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email used with different provider"
-      : "";
+  // TODO: code is not working in vercel deployment branch : auth/existing-email-provider-error
+  // ---------------------------------------
+  // const [urlError, setUrlError] = useState<string>("");
+  // const searchParams = useSearchParams();
+  // const SearchBarFallback = () => {
+  //   return <p>loading...</p>;
+  // };
+
+  // useEffect(() => {
+  //   const errorParam = searchParams.get("error");
+  //   if (errorParam === "OAuthAccountNotLinked") {
+  //     setUrlError("Email used with different provider");
+  //   }
+  // }, [searchParams]);
+
+  // ---------------------------------------
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -113,10 +130,18 @@ export const LoginForm = () => {
                 )}
               />
             </div>
-            <Suspense>
+            {/* 
+            // TODO: code is not working in vercel deployment BRANCH
+            auth/existing-email-provider-error 
+            // --------------------
+            <Suspense fallback={<SearchBarFallback />}>
               <FormError message={errorMsg || urlError} />
-              <FormSuccess message={successMsg} />
-            </Suspense>
+            </Suspense> 
+            // --------------------
+            */}
+
+            <FormError message={errorMsg} />
+            <FormSuccess message={successMsg} />
             <Button variant="shan" type="submit" className="w-full">
               Login
             </Button>
