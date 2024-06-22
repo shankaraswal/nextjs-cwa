@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition, useState } from "react";
+import { useTransition, useState, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -113,8 +113,10 @@ export const LoginForm = () => {
                 )}
               />
             </div>
-            <FormError message={errorMsg || urlError} />
-            <FormSuccess message={successMsg} />
+            <Suspense>
+              <FormError message={errorMsg || urlError} />
+              <FormSuccess message={successMsg} />
+            </Suspense>
             <Button variant="shan" type="submit" className="w-full">
               Login
             </Button>
