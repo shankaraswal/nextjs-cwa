@@ -1,16 +1,16 @@
-import { Header } from "@/components/auth/header";
-import { BackButton } from "@/components/auth/back-button";
-import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { CardWrapper } from "@/components/auth/card-wrapper";
 
 export const ErrorCard = () => {
   return (
-    <Card className="w-[400px] flex flex-col h-[300px] justify-center shadow-lg">
-      <CardHeader>
-        <Header label="Oops ! Something went wrong" />
-      </CardHeader>
-      <CardFooter className="text-center">
-        <BackButton label="Go back" href="/auth/user-login" />
-      </CardFooter>
-    </Card>
+    <CardWrapper
+      headerLabel="Oops ! Something went wrong"
+      backButtonLabel="Go back to Login"
+      backButtonHref="/auth/user-login"
+    >
+      <div className="w-full flex flex-col justify-center items-center ">
+        <ExclamationTriangleIcon className=" size-12 text-red-600 text-[100px]" />
+      </div>
+    </CardWrapper>
   );
 };
