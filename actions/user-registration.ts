@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { RegistrationSchema } from "@/schemas";
 import { db } from "@/lib/db";
 import { getUserByEmail } from "@/data/user";
+import { generateVerificationToken } from "@/lib/tokens";
 
 export const registrationActions = async (
   data: z.infer<typeof RegistrationSchema>
@@ -27,8 +28,9 @@ export const registrationActions = async (
       password: hashedPassword,
     },
   });
-
+  const verificationToken = generateVerificationToken(email);
+  console.log("XXXXXXXXX ==> ", verificationToken);
   // TODO: send verification email token to user
 
-  return { success: "Successfuly user registered !" };
+  return { success: "Confirmation email sent to email id !" };
 };
