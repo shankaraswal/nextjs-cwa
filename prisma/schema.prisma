@@ -1,7 +1,9 @@
 // prisma/schema.prisma
+
 datasource db {
   provider  = "postgresql"
   url  	    = env("DATABASE_URL")
+
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
@@ -48,4 +50,14 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([provider, providerAccountId])
+}
+
+
+model VerificationToken{
+  id       String       @id @default(cuid())
+  email    String          
+  token    String      @unique
+  expires  DateTime
+  
+  @@unique([email, token])
 }

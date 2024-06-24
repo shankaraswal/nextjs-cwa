@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { loginActions } from "@/actions/user-login";
+import { start } from "repl";
 
 export const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
@@ -61,16 +62,23 @@ export const LoginForm = () => {
     setSuccessMsg("");
 
     startTransition(async () => {
-      loginActions(data).then((response) => {
-        if (response) {
-          if (response.error) {
-            setErrorMsg(response.error);
-          } else {
-            setSuccessMsg("Login successful!");
-          }
-        }
+      loginActions(data).then((val) => {
+        setErrorMsg(val?.error);
+        setSuccessMsg(val?.success);
       });
     });
+
+    // startTransition(async () => {
+    //   loginActions(data).then((response) => {
+    //     if (response) {
+    //       if (response.error) {
+    //         setErrorMsg(response.error);
+    //       } else {
+    //         setSuccessMsg("Login successful!");
+    //       }
+    //     }
+    //   });
+    // });
   };
 
   return (

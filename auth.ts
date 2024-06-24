@@ -29,6 +29,18 @@ export const {
     },
   },
   callbacks: {
+    async signIn({ user, account }) {
+      // allow all users if signedin with any providers
+      if (account?.provider !== "credentials") return true;
+
+      const existingUser = await getUserById(user.id as string);
+
+      // restrict if user's email is not verified
+      if (!existingUser?.emailVerified) return false;
+
+      return true;
+    },
+
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
