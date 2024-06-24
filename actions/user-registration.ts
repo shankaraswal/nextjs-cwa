@@ -5,7 +5,7 @@ import { RegistrationSchema } from "@/schemas";
 import { db } from "@/lib/db";
 import { getUserByEmail } from "@/data/user";
 import { generateVerificationToken } from "@/lib/tokens";
-
+import { sendVerificationEmail } from "@/lib/mail";
 export const registrationActions = async (
   data: z.infer<typeof RegistrationSchema>
 ) => {
@@ -28,9 +28,8 @@ export const registrationActions = async (
       password: hashedPassword,
     },
   });
-  const verificationToken = generateVerificationToken(email);
-  console.log("XXXXXXXXX ==> ", verificationToken);
-  // TODO: send verification email token to user
+  const verificationToken = await generateVerificationToken(email);
+  await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
   return { success: "Confirmation email sent to email id !" };
 };
